@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap-4.1.3/bootstrap.min.css" />
+    <script type="text/javascript" src="js/bootstrap-4.1.3/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="css/StyleSheet.min.css" />
+
+    <script type="text/javascript">
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+        if (getParameterByName("lang")) {
+            lang = getParameterByName("lang");
+        }
+        else {
+            lang = "tc";
+        }
+    </script>
+</head>
+<body>
+    <div id="header" class="headerEN">
+        <div id="companyLogo"><a href="https://www.aristo.com.hk/" target="_blank"><img id="bannerCompany" src="images/aristoLogo.png" width="240" height="60" alt="" border="0" /></a></div>
+        <div id="companyLogo2">
+            <span class="tc" style="float:left;"><img id="bannerBook" src="images/bookLogo_TC.png" width="193" height="60" alt="" border="0" /></span>
+            <span class="en" style="float:left;"><img id="bannerBook" src="images/bookLogo_EN.png" width="193" height="60" alt="" border="0" /></span>
+        </div>
+        <div class="headingDiv">
+            <span id="headingTitleTC" class="tc" style="float:left;">設計一日的餐單</span>
+            <span id="headingTitleEN" class="en" style="float:left;">Designing a one-day menu</span>
+        </div>
+        <div id="lang"><img src="images/lang.png" border="0" /></div>
+    </div>
+
+
+    <div id="wrap">
+        <div id="main" class="container bd-content d-flex flex-wrap flex-md-nowrap">
+            <div class="w-100 container-fluid">
+                <div class="col-12 col-md-3 col-xl-3 mt-3 mr-3 p-0 float-right" id="daily_summary_parent">
+                    <div id="daily_summary" class="contentBox">
+                        <div class="contentBox-title2 m-2"><span class="en">Daily summary</span><span class="tc">每日概要</span></div>
+                        <div id="daily_summary_content" class="m-2 row">
+                            <div class="col-8 col-md-12 p-0">
+                                <table id="daily_needs" class="m-0 ml-1 table table-sm">
+                                    <tr><th class="d-md-none border-0"></th><th class="border-0 text-right text-md-left" colspan="2"><span class="en">Suggested intake:</span><span class="tc">建議攝取量：</span></th></tr>
+                                    <tr><td><span class="en">Energy: </span><span class="tc">能量：</span></td><td align="right"><span id="needs_energy"> - </span></tr>
+                                    <tr><td><span class="en">Fat: </span><span class="tc">脂質：</span></td><td align="right"><span id="needs_fat"> - </span></td></tr>
+                                    <tr><td><span class="en">Vegetable: </span><span class="tc">蔬菜：</span></td><td align="right"><span id="needs_veg"> - </span></td></tr>
+                                    <tr><td><span class="en">Fruit: </span><span class="tc">水果：</span></td><td align="right"><span id="needs_fruit"> - </span></td></tr>
+                                </table>
+                            </div>
+                            <div class="col-4 col-md-12 p-0">
+                                <table id="daily_intake" class="m-0 ml-1 table table-sm">
+                                    <tr><th class="d-none border-0"></th><th class="border-0 text-right text-md-left" colspan="2"><span class="en">Your intake:</span><span class="tc">你的攝取量：</span></th></tr>
+                                    <tr><td class="d-none d-md-table-cell"><span class="en">Energy: </span><span class="tc">能量：</span></td><td align="right"><span id='energy_intake'> - </span></td></tr>
+                                    <tr><td class="d-none d-md-table-cell"><span class="en">Fat: </span><span class="tc">脂質：</span></td><td align="right"><span id="fat_intake"> - </span></td></tr>
+                                    <tr><td class="d-none d-md-table-cell"><span class="en">Vegetable: </span><span class="tc">蔬菜：</span></td><td align="right"><span id="veg_intake"> - </span></td></tr>
+                                    <tr><td class="d-none d-md-table-cell"><span class="en">Fruit: </span><span class="tc">水果：</span></td><td align="right"><span id="fruit_intake"> - </span></td></tr>
+                                </table>
+                            </div>
+                            <div id="daily_advise" class="col-12 m-0 mt-2 p-1 pl-2 pr-2"></div>
+                            <div id="footnote" class="footnote border-top">
+                                <p class="m-0 mt-2">* <span class="en">1 portion of vegetable/fruit</span><span class="tc">一份蔬菜/水果</span> ≈ 80 g</p>
+                                <p class="m-0 mt-1"><span class="badge alert-warning">&nbsp;&nbsp;&nbsp;&nbsp;</span> - <span class="en">Daily intake is <strong>not enough</strong></span><span class="tc">每日攝取量<strong>並不足夠</strong></span></p>
+                                <p class="m-0 mt-1"><span class="badge alert-success">&nbsp;&nbsp;&nbsp;&nbsp;</span> - <span class="en">Daily intake is <strong>enough</strong></span><span class="tc">每日攝取量<strong>已足夠</strong></span></p>
+                                <p class="m-0 mt-1"><span class="badge alert-danger">&nbsp;&nbsp;&nbsp;&nbsp;</span> - <span class="en">Daily intake is <strong>too much</strong></span><span class="tc">每日攝取量<strong>過多</strong></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-8 col-xl-8 p-0 float-left">
+                    <div id="energy_needs" class="row mt-3 mb-3 contentBox">
+                        <div class="col-12 contentBox-title"><span class="en">Daily energy needed</span><span class="tc">每天所需的能量</span></div>
+                        <div class="col-12">
+                            <form id="needs_form">
+                                <div class="form-row">
+                                    <div class="form-group col-5 col-md-2 mr-3">
+                                        <label><span class="en">Gender:</span><span class="tc">性別：</span></label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="needs_gender" id="gender_m" checked>
+                                            <label class="form-check-label" for="gender_m">
+                                                <span class="en">Male</span><span class="tc">男性</span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="needs_gender" id="gender_f">
+                                            <label class="form-check-label" for="gender_f">
+                                                <span class="en">Female</span><span class="tc">女性</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-5 col-md-2 mr-2">
+                                        <label><span class="en">Age:</span><span class="tc">年齡：</span></label>
+                                        <div>
+                                            <input type="number" id="needs_age" min="1" max="100" style="width:70px" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12 col-md-5">
+                                        <label><span class="en">Level of physical activity:</span><span class="tc">體力活動水平：</span></label>
+                                        <select class="form-control" id="needs_activity">
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-12 col-md-1 ml-md-3 ml-sm-0">
+                                        <button type="submit" class="blueBtn" id="needs_cal"><span class="en">Update</span><span class="tc">更新</span></button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                    <div id="food_nutrients" class="row mt-3 mb-3 contentBox">
+                        <div class="col-12 contentBox-title"><span class="en">Food nutrient</span><span class="tc">食物營養</span></div>
+                        <div id="food_menu_header" class="col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb m-0 mt-2 mb-2 p-2" id="food_menu_nav" style="background-color: rgb(255, 228, 182);border: solid;border: rgb(248, 197, 110);padding: 10px;border-radius: 10px;"></ol>
+                            </nav>
+                        </div>
+                        <div id="food_menu" class="col-4 col-lg-3"></div>
+                        <div id="food_data" class="col-8 col-lg-9">
+                            <div id="food_nutrient" class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12 col-md-4 text-center">
+                                        <div><img src="" alt="" id="fd_img" /></div>
+                                        <h5 id="fd_name"></h5>
+                                    </div>
+                                    <div class="col-12 col-md-8">
+                                        <h6><span class="en">Nutrition value (per 100g)</span><span class="tc">營養價值（每 100 克）</span></h6>
+                                        <table class="w-100">
+                                            <tr style='background:#f7d8b0;'><th scope='row'><span class="en">Energy</span><span class="tc">能量</span></th><td id="fd_energy"></td></tr>
+                                            <tr><th scope='row'><span class="en">Protein</span><span class="tc">蛋白質</span></th><td id="fd_protein"></td></tr>
+                                            <tr><th scope='row'><span class="en">Total fat</span><span class="tc">總脂肪</span></th><td id="fd_fat"></td></tr>
+                                            <tr><td>- <span class="en">Saturated fat</span><span class="tc">飽和脂肪</span></td><td id="fd_satfat"></td></tr>
+                                            <tr><td>- <span class="en">Trans fat</span><span class="tc">反式脂肪</span></td><td id="fd_transfat"></td></tr>
+                                            <tr><th scope='row'><span class="en">Cholesterol</span><span class="tc">膽固醇</span></th><td id="fd_cholesterol"></td></tr>
+                                            <tr><th scope='row'><span class="en">Carbohydrate</span><span class="tc">碳水化合物</span></th><td id="fd_carbo"></td></tr>
+                                            <tr><td>- <span class="en">Dietary fibre</span><span class="tc">食用纖維</span></td><td id="fd_fibre"></td></tr>
+                                            <tr><td>- <span class="en">Sugar</span><span class="tc">糖</span></td><td id="fd_sugar"></td></tr>
+                                            <tr><th scope='row'><span class="en">Vitamin</span><span class="tc">維生素</span></th><td id="fd_vitamin"></td></tr>
+                                            <tr><th scope='row'><span class="en">Mineral</span><span class="tc">礦物質</span></th><td id="fd_mineral"></td></tr>
+                                        </table>
+                                    </div>
+                                    <br />
+                                    <div class="col-12" style="margin-top:20px;">
+                                        <h6><b><span class="en">Remarks</span><span class="tc">備註</span></b></h6>
+                                        <p id="fd_remark"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-light rounded p-2">
+                                <form id="add_form">
+                                    <div class="form-row">
+                                        <input type="hidden" id="add_food" value="" />
+                                        <div class="form-group col col-lg-4">
+                                            <label><span class="en">Quantity:</span><span class="tc">份量：</span></label>
+                                            <div>
+                                                <input type="number" class="quantity" id="add_qty" min="0" step="0.5" value="1" />
+                                                <label id="add_unit"></label>
+                                                <br />
+                                                <h6 id="unit_to_g"></h6>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col col-md-7 col-lg-6">
+                                            <label><span class="en">Add to meal:</span><span class="tc">加入餐單：</span></label>
+                                            <select class="form-control" id="add_to">
+                                                <option value="b" selected>Breakfast 早餐</option>
+                                                <option value="l">Lunch 午餐</option>
+                                                <option value="d">Dinner 晚餐</option>
+                                                <option value="o">Other 其他</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="blueBtn" id="add_add"><span class="en">Add</span><span class="tc">加入</span></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="planning_meals" class="row mt-3 mb-3 contentBox">
+                        <div class="col-12 contentBox-title"><span class="en">Meal plans</span><span class="tc">膳食計劃</span></div>
+                        <div class="col-12" style="padding-bottom:10px; padding-top:10px;">
+                            <div class="list-group">
+                                <div id="meal_breakfast" class="list-group-item p-0">
+                                    <div class="row m-0">
+                                        <div class="col-12 col-md-3 col-lg-3 bg-light" style="background-color: rgb(255, 205, 170) !important;">
+                                            <h6 class="card-title"><span class="en">Breakfast</span><span class="tc">早餐</span></h6>
+                                        </div>
+                                        <div class="col-12 col-md-9 col-lg-9">
+                                            <div id="breakfast_cart"></div>
+                                            <hr />
+                                            <div class="mt-2 row" id="breakfast_summary"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="meal_lunch" class="list-group-item p-0">
+                                    <div class="row m-0">
+                                        <div class="col-12 col-md-3 col-lg-3 bg-primary text-white">
+                                            <h6 class="card-title"><span class="en">Lunch</span><span class="tc">午餐</span></h6>
+                                        </div>
+                                        <div class="col-12 col-md-9 col-lg-9">
+                                            <div id="lunch_cart"></div>
+                                            <hr />
+                                            <div class="mt-2 row" id="lunch_summary"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="meal_dinner" class="list-group-item p-0">
+                                    <div class="row m-0">
+                                        <div class="col-12 col-md-3 col-lg-3 bg-info text-white">
+                                            <h6 class="card-title"><span class="en">Dinner</span><span class="tc">晚餐</span></h6>
+                                        </div>
+                                        <div class="col-12 col-md-9 col-lg-9">
+                                            <div id="dinner_cart"></div>
+                                            <hr />
+                                            <div class="mt-2 row" id="dinner_summary"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="meal_other" class="list-group-item p-0">
+                                    <div class="row m-0">
+                                        <div class="col-12 col-md-3 col-lg-3 bg-dark text-white">
+                                            <h6 class="card-title"><span class="en">Other</span><span class="tc">其他</span></h6>
+                                        </div>
+                                        <div class="col-12 col-md-9 col-lg-9">
+                                            <div id="other_cart"></div>
+                                            <hr />
+                                            <div class="mt-2 row" id="other_summary"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer Start-->
+    <div id="footer">
+        <!--<div id="backTop"><a href="javascript:void(0);"><img src="images/backTop.png" width="30" height="30" alt="回頁頂 Back to Top" border="0" /></a></div>-->
+        <div id="copyright">
+            © 2018 出版社有限公司 版權所有 不得轉載 Copyright © 2018 Educational Press Ltd
+            <br />
+            <a href="https://www.aristo.com.hk/notice/terms.html" target="_blank">使用條款｜版權聲明｜免責聲明 Terms and conditions of use | Copyright notice | Disclaimer</a>&nbsp&nbsp;&nbsp;
+            <a href="https://www.aristo.com.hk/notice/privacy.html" target="_blank">私隱政策聲明 Privacy Policy</a>&nbsp&nbsp;&nbsp;
+            <a href="https://www.aristo.com.hk/notice/eula.html" target="_blank">用戶使用協議 End User License Agreement</a>
+        </div>
+    </div>
+    <!--Footer End-->
+
+    <script type="text/javascript" src="js/FoodData.js"></script>
+    <script type="text/javascript" src="js/FoodMenuStructure.js"></script>
+    <script type="text/javascript" src="js/view.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript">
+        $('#food_menu, #food_menu_header').on('click', function (event) {
+            $('html, body').animate({
+                scrollTop: $('#food_nutrients').offset().top - 10
+            }, 'fast');
+        });
+    </script>
+</body>
+</html>
